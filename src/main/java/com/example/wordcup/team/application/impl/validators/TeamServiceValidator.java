@@ -15,8 +15,9 @@ public class TeamServiceValidator implements TeamValidator {
     private Map<String, CheckRule> rules = new HashMap();
 
     {
-        rules.put("Name não pode ser vazio", team -> team.getName().equals(""));
-        rules.put("NumberOfPlayers não pode ser 0 ou maior que 10", team -> team.getNumberOfPlayers()<=0 | team.getNumberOfPlayers()>10);
+        rules.put("Name nao pode ser vazio", team -> team.getName().equals(""));
+        rules.put("Name nao pode ter mais que 30 caracteres", team -> team.getName().length()>30);
+        rules.put("NumberOfPlayers nao pode ser 0 ou maior que 10", team -> team.getNumberOfPlayers()<=0 | team.getNumberOfPlayers()>10);
     }
 
     @Override
@@ -30,7 +31,6 @@ public class TeamServiceValidator implements TeamValidator {
         if (!violations.isEmpty()){
             throw new IllegalArgumentException("Algum valor é inválido" + violations);
         }
-
     }
 
     private interface CheckRule{

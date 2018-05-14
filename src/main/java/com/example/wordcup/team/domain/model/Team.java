@@ -1,5 +1,10 @@
 package com.example.wordcup.team.domain.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="team")
 public class Team {
 
     private String name;
