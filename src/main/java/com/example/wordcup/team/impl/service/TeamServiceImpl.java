@@ -5,6 +5,8 @@ import com.example.wordcup.team.domain.model.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamServiceImpl implements TeamService {
 
@@ -20,4 +22,20 @@ public class TeamServiceImpl implements TeamService {
     public Team findBy(String name) {
        return teamRepository.findBy(name);
     }
+
+    @Override
+    public List<Team> findAll() {
+        return teamRepository.findAll();
+    }
+
+    @Override
+    public void updateTeam(Team team) {
+        teamRepository.updateTeam(team);
+    }
+
+    @Override
+    public void delete(String name) {
+        teamRepository.delete(name);
+    }
+
 }

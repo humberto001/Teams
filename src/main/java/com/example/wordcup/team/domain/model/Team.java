@@ -3,10 +3,7 @@ package com.example.wordcup.team.domain.model;
 public class Team {
 
     private String name;
-    private Integer numberOfPlayers;
-
-    public Team(String name) {
-    }
+    private int numberOfPlayers;
 
     public String getName() {
         return name;
@@ -16,11 +13,11 @@ public class Team {
         this.name = name;
     }
 
-    public Integer getNumberOfPlayers() {
+    public int getNumberOfPlayers() {
         return numberOfPlayers;
     }
 
-    public void setNumberOfPlayers(Integer numberOfPlayers) {
+    public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
+import java.util.List;
+
 
 @RestController
 public class TeamEndpoint {
@@ -20,7 +22,22 @@ public class TeamEndpoint {
 
     @GetMapping(path = "/team/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Team findTeam(@PathVariable String name){
-        Team team = teamService.findBy(name);
-        return team;
+        return teamService.findBy(name);
     }
+
+    @GetMapping(path= "/team/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Team> findAllTeam(){
+        return teamService.findAll();
+    }
+    @PutMapping(path = "/team/{name}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateTeam(@RequestBody Team team, @PathVariable String name){
+        teamService.updateTeam(team);
+    }
+
+    @DeleteMapping(path = "team/{name}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteTeam(@PathVariable String name ){
+        teamService.delete(name);
+
+    }
+
 }

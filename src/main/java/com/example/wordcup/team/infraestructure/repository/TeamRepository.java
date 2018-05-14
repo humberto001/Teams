@@ -4,12 +4,11 @@ import com.example.wordcup.team.domain.model.Team;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class TeamRepository implements com.example.wordcup.team.domain.model.TeamRepository {
 
-    List teams = new ArrayList<Team>();
+    List<Team> teams = new ArrayList<>();
 
     @Override
     public void save(Team team) {
@@ -18,9 +17,34 @@ public class TeamRepository implements com.example.wordcup.team.domain.model.Tea
 
    @Override
     public Team findBy(String name) {
-        Team team = new Team(name);
-        return team;
-        //fazer a comparação por nome
+
+       for (Team team : teams){
+           if (team.getName().equals(name))
+               return team;
+       }
+       return null;
     }
 
+    @Override
+    public List <Team> findAll() {
+        return teams;
+    }
+
+    @Override
+    public void updateTeam(Team team) {
+        for (Team t : teams){
+            if (t.getName().equals(team.getName())){
+                t.setNumberOfPlayers(team.getNumberOfPlayers());
+            }
+        }
+    }
+
+    @Override
+    public void delete(String name) {
+        for (Team team : teams){
+            if (team.getName().equals(name)){
+                teams.remove(team);
+            }
+        }
+    }
 }
