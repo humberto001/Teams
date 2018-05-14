@@ -1,7 +1,7 @@
 package com.example.wordcup.team.view;
 
 import com.example.wordcup.team.domain.model.Team;
-import com.example.wordcup.team.impl.service.TeamService;
+import com.example.wordcup.team.application.impl.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
@@ -13,7 +13,7 @@ import java.util.List;
 public class TeamEndpoint {
 
     @Autowired
-    private TeamService teamService;
+    TeamService teamService;
 
     @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void addTeam(@RequestBody Team team){
@@ -29,6 +29,7 @@ public class TeamEndpoint {
     public List<Team> findAllTeam(){
         return teamService.findAll();
     }
+
     @PutMapping(path = "/team/{name}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateTeam(@RequestBody Team team, @PathVariable String name){
         teamService.updateTeam(team);

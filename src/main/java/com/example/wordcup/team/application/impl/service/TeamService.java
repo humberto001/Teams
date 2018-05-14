@@ -1,4 +1,4 @@
-package com.example.wordcup.team.impl.service;
+package com.example.wordcup.team.application.impl.service;
 
 import com.example.wordcup.team.domain.model.Team;
 
