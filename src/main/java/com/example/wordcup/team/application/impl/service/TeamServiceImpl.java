@@ -6,7 +6,7 @@ import com.example.wordcup.team.domain.model.TeamValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeamServiceImpl implements TeamService {
@@ -24,24 +24,23 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team findBy(String name) {
-       return teamRepository.findBy(name);
+    public Optional <Team> findBy(Long id) {
+       return teamRepository.findById(id);
     }
 
     @Override
-    public List<Team> findAll() {
+    public Iterable <Team> findAll() {
         return teamRepository.findAll();
     }
 
     @Override
     public void updateTeam(Team team) {
         teamValidator.checkRules(team);
-        teamRepository.updateTeam(team);
+        teamRepository.save(team);
     }
 
     @Override
-    public void delete(String name) {
-        teamRepository.delete(name);
+    public void delete(Long id) {
+        teamRepository.deleteById(id);
     }
-
 }

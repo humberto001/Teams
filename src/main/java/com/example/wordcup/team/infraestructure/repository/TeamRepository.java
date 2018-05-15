@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TeamRepository implements com.example.wordcup.team.domain.model.TeamRepository {
+public class TeamRepository  {
 
-    List<Team> teams = new ArrayList<>();
+   /* List<Team> teams = new ArrayList<>();
 
     @Override
     public void save(Team team) {
@@ -16,13 +16,14 @@ public class TeamRepository implements com.example.wordcup.team.domain.model.Tea
     }
 
    @Override
+
     public Team findBy(String name) {
 
-       for (Team team : teams){
+      for (Team team : teams){
            if (team.getName().equals(name))
                return team;
        }
-       return null;
+      return null;
     }
 
     @Override
@@ -46,5 +47,5 @@ public class TeamRepository implements com.example.wordcup.team.domain.model.Tea
                 teams.remove(team);
             }
         }
-    }
+    }*/
 }

@@ -1,13 +1,19 @@
 package com.example.wordcup.team.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="team")
+@Table(name = "teams")
 public class Team {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "qtd_players")
     private int numberOfPlayers;
 
     public String getName() {
@@ -24,6 +30,14 @@ public class Team {
 
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }
