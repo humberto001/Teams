@@ -1,18 +1,15 @@
 package com.example.wordcup.team.domain.model;
 
+import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
+public interface TeamRepository {
 
-@Repository
-public interface TeamRepository extends CrudRepository<Team,Long> {
+    Optional<Team> findBy (Long id);
 
-    //Team findBy (String name);
-    //void delete(String name);
-    /*void save(Team team);
-    List<Team> findAll();
-    void updateTeam(Team team);
-    */
+    void deleteById(Long id);
+
+    void save(Team team);
+
+    Iterable<Team> findAll();
 }

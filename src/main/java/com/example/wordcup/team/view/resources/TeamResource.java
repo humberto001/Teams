@@ -1,11 +1,19 @@
-package com.example.wordcup.team.domain.model;
+package com.example.wordcup.team.view.resources;
 
 
-public class Team {
+public class TeamResource {
 
     private Long id;
     private String name;
     private int numberOfPlayers;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,13 +30,4 @@ public class Team {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
