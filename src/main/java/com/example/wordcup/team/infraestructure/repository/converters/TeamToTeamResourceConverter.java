@@ -37,8 +37,9 @@ public class TeamToTeamResourceConverter {
     }
 
     public Iterable <TeamResource> fromModel(Iterable <Team> teams) {
+        Collection <TeamResource> resources = new ArrayList();
+        teams.forEach(team -> resources.add(fromModel(Optional.of(team))));
 
-        Collection <TeamResource> resources = new ArrayList((Collection) teams);
         return resources;
     }
 }
