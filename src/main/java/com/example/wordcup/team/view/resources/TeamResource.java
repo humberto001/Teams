@@ -1,11 +1,28 @@
 package com.example.wordcup.team.view.resources;
 
 
-public class TeamResource {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import java.io.Serializable;
+
+public class TeamResource implements Serializable {
+    @JsonPropertyOrder({
+            "id",
+            "name",
+            "numberOfPlayers"
+    })
 
     private Long id;
     private String name;
     private int numberOfPlayers;
+
+    public TeamResource(TeamResource resource) {
+    }
+
+    public TeamResource() {
+
+    }
 
     public Long getId() {
         return id;

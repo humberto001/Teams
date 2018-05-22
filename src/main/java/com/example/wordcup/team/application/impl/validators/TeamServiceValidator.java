@@ -1,7 +1,9 @@
 package com.example.wordcup.team.application.impl.validators;
 
 import com.example.wordcup.team.domain.model.Team;
+import com.example.wordcup.team.domain.model.TeamRepository;
 import com.example.wordcup.team.domain.model.TeamValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -12,12 +14,18 @@ import java.util.stream.Collectors;
 @Component
 public class TeamServiceValidator implements TeamValidator {
 
+    @Autowired
+    TeamRepository repository;
+
+
     private Map <String, CheckRule> rules = new HashMap();
+
 
     {
         rules.put("Name nao pode ser vazio", team -> team.getName().equals(""));
         rules.put("Name nao pode ter mais que 30 caracteres", team -> team.getName().length() > 30);
         rules.put("NumberOfPlayers nao pode ser 0 ou maior que 10", team -> team.getNumberOfPlayers() <= 0 | team.getNumberOfPlayers() > 10);
+        rules.put("Time já existente", team -> team.getName().equals("Um time que já esta na base"));
     }
 
     @Override

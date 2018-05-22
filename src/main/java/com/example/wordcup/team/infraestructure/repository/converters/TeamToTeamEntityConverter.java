@@ -31,7 +31,7 @@ public class TeamToTeamEntityConverter {
         return entity;
     }
 
-    public Iterable <Team> toModel(Iterable<TeamEntity> teamEntities) { //Pra cada entidade de teamEntities, converter para o model e adicionar em teams
+    public Iterable <Team> toModel(Iterable<TeamEntity> teamEntities) {
         Collection <Team> teams = new ArrayList();
         teamEntities.forEach(entity -> teams.add(toModel(Optional.of(entity))));
 

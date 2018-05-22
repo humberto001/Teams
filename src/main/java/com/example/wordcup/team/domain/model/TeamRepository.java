@@ -7,9 +7,11 @@ public interface TeamRepository {
 
     Optional<Team> findBy (Long id);
 
+    Optional<Team> findBy(String name);
+
     void deleteById(Long id);
 
-    void save(Team team);
+    Team save(Team team);
 
     Iterable<Team> findAll();
 }

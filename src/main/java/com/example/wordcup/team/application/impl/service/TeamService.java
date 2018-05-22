@@ -6,13 +6,13 @@ import java.util.Optional;
 
 public interface TeamService {
 
-    void save(Team team);
+    Team save(Team team);
 
     Optional <Team> findBy(Long id);
 
     Iterable <Team> findAll();
 
-    void updateTeam(Team team);
+    Team updateTeam(Team team);
 
     void delete(Long id);
 }

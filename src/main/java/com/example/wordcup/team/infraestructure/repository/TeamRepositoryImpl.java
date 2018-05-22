@@ -6,7 +6,6 @@ import com.example.wordcup.team.infraestructure.repository.converters.TeamToTeam
 import com.example.wordcup.team.infraestructure.repository.entities.TeamEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
@@ -26,14 +25,23 @@ public class TeamRepositoryImpl implements TeamRepository {
     }
 
     @Override
+    public Optional <Team> findBy(String name) {
+    //    Optional<TeamEntity> entity = repositorySpringData.;
+
+        return Optional.empty();
+    }
+
+    @Override
     public void deleteById(Long id) {
         repositorySpringData.deleteById(id);
     }
 
     @Override
-    public void save(Team team) {
+    public Team save(Team team) {
         TeamEntity entity = entityConverter.fromModel(team);
         repositorySpringData.save(entity);
+        team.setId(entity.getId());
+        return team;
     }
 
     @Override

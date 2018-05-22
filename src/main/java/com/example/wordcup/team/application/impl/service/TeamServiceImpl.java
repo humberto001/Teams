@@ -18,9 +18,9 @@ public class TeamServiceImpl implements TeamService {
     TeamValidator teamValidator;
 
     @Override
-    public void save(Team team) {
+    public Team save(Team team) {
         teamValidator.checkRules(team);
-        teamRepository.save(team);
+        return teamRepository.save(team);
     }
 
     @Override
@@ -34,9 +34,10 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void updateTeam(Team team) {
+    public Team updateTeam(Team team) {
         teamValidator.checkRules(team);
-        teamRepository.save(team);
+
+        return teamRepository.save(team);
     }
 
     @Override

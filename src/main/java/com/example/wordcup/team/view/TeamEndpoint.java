@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 
+import java.util.Optional;
+
 @RestController
 public class TeamEndpoint {
 
@@ -17,16 +19,18 @@ public class TeamEndpoint {
     @Autowired
     private TeamService teamService;
 
-    @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addTeam(@RequestBody TeamResource resource) {
+    @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody TeamResource addTeam(@RequestBody TeamResource resource) {
         Team team = converter.toModel(resource);
-        teamService.save(team);
+        Team teamSaved = teamService.save(team);
+
+        return converter.fromModel(Optional.of(teamSaved));
     }
 
     @GetMapping(path = "/team/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TeamResource findTeam(@PathVariable Long id) {
-        TeamResource resource = converter.fromModel(teamService.findBy(id));
-        return resource;
+
+        return converter.fromModel(teamService.findBy(id));
     }
 
     @GetMapping(path = "/team/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,10 +40,12 @@ public class TeamEndpoint {
     }
 
     @PutMapping(path = "/team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateTeam(@RequestBody TeamResource resource, @PathVariable Long id) {
+    public TeamResource updateTeam(@RequestBody TeamResource resource, @PathVariable Long id) {
         Team team = converter.toModel(resource);
         team.setId(id);
-        teamService.updateTeam(team);
+        Team updatedTeam = teamService.updateTeam(team);
+
+        return new TeamResource(converter.fromModel(Optional.of(updatedTeam)));
     }
 
     @DeleteMapping(path = "team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
