@@ -7,6 +7,7 @@ import com.example.wordcup.team.infraestructure.repository.entities.TeamEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Repository
 public class TeamRepositoryImpl implements TeamRepository {
@@ -20,15 +21,16 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     @Override
     public Optional <Team> findBy(Long id) {
+
         Optional <TeamEntity> entity = repositorySpringData.findById(id);
-        return Optional.of(entityConverter.toModel(entity));
+        return Optional.ofNullable(entityConverter.toModel(entity));
     }
 
     @Override
     public Optional <Team> findBy(String name) {
-    //    Optional<TeamEntity> entity = repositorySpringData.;
 
-        return Optional.empty();
+        Optional<TeamEntity> entity = repositorySpringData.findBy(name);
+        return Optional.ofNullable(entityConverter.toModel(entity));
     }
 
     @Override

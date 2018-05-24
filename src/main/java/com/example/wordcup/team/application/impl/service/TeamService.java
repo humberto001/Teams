@@ -12,7 +12,7 @@ public interface TeamService {
 
     Iterable <Team> findAll();
 
-    Team updateTeam(Team team);
+    Optional<Team> updateTeam(Team team);
 
     void delete(Long id);
 }

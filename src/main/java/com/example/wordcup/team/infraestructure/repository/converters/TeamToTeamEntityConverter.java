@@ -11,12 +11,14 @@ import java.util.Optional;
 @Component
 public class TeamToTeamEntityConverter {
 
-    public Team toModel(Optional <TeamEntity> entity){
+    public Team toModel(Optional <TeamEntity> optionalEntity){
+
+        if (!optionalEntity.isPresent()){return null;}
 
         Team model = new Team();
-        model.setId(entity.get().getId());
-        model.setName(entity.get().getName());
-        model.setNumberOfPlayers(entity.get().getNumberOfPlayers());
+        model.setId(optionalEntity.get().getId());
+        model.setName(optionalEntity.get().getName());
+        model.setNumberOfPlayers(optionalEntity.get().getNumberOfPlayers());
 
         return  model;
     }

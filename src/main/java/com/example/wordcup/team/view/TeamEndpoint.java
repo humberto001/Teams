@@ -2,6 +2,7 @@ package com.example.wordcup.team.view;
 
 import com.example.wordcup.team.domain.model.Team;
 import com.example.wordcup.team.application.impl.service.TeamService;
+import com.example.wordcup.team.infra.FindTeamValidationException;
 import com.example.wordcup.team.infraestructure.repository.converters.TeamToTeamResourceConverter;
 import com.example.wordcup.team.view.resources.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,12 @@ public class TeamEndpoint {
     @GetMapping(path = "/team/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TeamResource findTeam(@PathVariable Long id) {
 
-        return converter.fromModel(teamService.findBy(id));
+        Optional<Team> team = teamService.findBy(id);
+
+         if (!team.isPresent())
+             throw new FindTeamValidationException();
+
+         return converter.fromModel(team);
     }
 
     @GetMapping(path = "/team/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,17 +47,17 @@ public class TeamEndpoint {
 
     @PutMapping(path = "/team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TeamResource updateTeam(@RequestBody TeamResource resource, @PathVariable Long id) {
+
         Team team = converter.toModel(resource);
         team.setId(id);
-        Team updatedTeam = teamService.updateTeam(team);
+        Optional <Team> updatedTeam = teamService.updateTeam(team);
 
-        return new TeamResource(converter.fromModel(Optional.of(updatedTeam)));
+        return new TeamResource(converter.fromModel(updatedTeam));
     }
 
     @DeleteMapping(path = "team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void deleteTeam(@PathVariable Long id) {
         teamService.delete(id);
-
     }
 
 }

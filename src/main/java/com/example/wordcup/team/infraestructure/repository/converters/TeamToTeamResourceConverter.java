@@ -1,6 +1,7 @@
 package com.example.wordcup.team.infraestructure.repository.converters;
 
 import com.example.wordcup.team.domain.model.Team;
+import com.example.wordcup.team.infra.TeamValidationException;
 import com.example.wordcup.team.view.resources.TeamResource;
 import org.springframework.stereotype.Component;
 
