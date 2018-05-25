@@ -26,7 +26,7 @@ public class TeamServiceValidator implements TeamValidator {
         rules.put("Name nao pode ser vazio", team -> team.getName().equals(""));
         rules.put("Name nao pode ter mais que 30 caracteres", team -> team.getName().length() > 30);
         rules.put("NumberOfPlayers nao pode ser 0 ou maior que 10", team -> team.getNumberOfPlayers() <= 0 | team.getNumberOfPlayers() > 10);
-        rules.put("Time já existente", team ->  repository.findBy(team.getName()).isPresent());
+        //rules.put("Time já existente", team ->  repository.findBy(team.getName()).isPresent());
     }
 
     @Override

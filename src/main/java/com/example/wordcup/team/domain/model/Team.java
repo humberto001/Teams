@@ -7,6 +7,15 @@ public class Team {
     private String name;
     private int numberOfPlayers;
 
+    public Team(Long id, String name, int numberOfPlayers) {
+        this.id = id;
+        this.name = name;
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public Team() {
+    }
+
     public String getName() {
         return name;
     }

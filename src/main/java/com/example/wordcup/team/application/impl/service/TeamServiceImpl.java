@@ -3,6 +3,7 @@ package com.example.wordcup.team.application.impl.service;
 import com.example.wordcup.team.domain.model.Team;
 import com.example.wordcup.team.domain.model.TeamRepository;
 import com.example.wordcup.team.domain.model.TeamValidator;
+import com.example.wordcup.team.infra.FindTeamValidationException;
 import com.example.wordcup.team.infra.TeamValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team save(Team team) {
+
+        if (teamRepository.findBy(team.getName()).isPresent())
+            throw new TeamValidationException("Time já existente");
+
         teamValidator.checkRules(team);
         return teamRepository.save(team);
     }
@@ -37,12 +42,12 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Optional<Team> updateTeam(Team team) {
-        /*if (team.getName().isEmpty())
-            throw new TeamValidationException("Time não pode ser vazio");*/
+    public Optional <Team> updateTeam(Team team) {
+        if (!teamRepository.findBy(team.getId()).isPresent()) {
+            throw new FindTeamValidationException();
+        }
 
         teamValidator.checkRules(team);
-
         return Optional.ofNullable(teamRepository.save(team));
     }
 

@@ -22,6 +22,7 @@ public class TeamEndpoint {
 
     @PostMapping(path = "/team", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody TeamResource addTeam(@RequestBody TeamResource resource) {
+
         Team team = converter.toModel(resource);
         Team teamSaved = teamService.save(team);
 
@@ -52,7 +53,8 @@ public class TeamEndpoint {
         team.setId(id);
         Optional <Team> updatedTeam = teamService.updateTeam(team);
 
-        return new TeamResource(converter.fromModel(updatedTeam));
+
+        return converter.fromModel(updatedTeam);
     }
 
     @DeleteMapping(path = "team/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
