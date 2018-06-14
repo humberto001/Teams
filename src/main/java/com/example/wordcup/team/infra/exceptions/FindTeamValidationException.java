@@ -1,4 +1,4 @@
-package com.example.wordcup.team.infra;
+package com.example.wordcup.team.infra.exceptions;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 

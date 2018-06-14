@@ -2,7 +2,7 @@ package com.example.wordcup.team.view;
 
 import com.example.wordcup.team.domain.model.Team;
 import com.example.wordcup.team.application.impl.service.TeamService;
-import com.example.wordcup.team.infra.FindTeamValidationException;
+import com.example.wordcup.team.infra.exceptions.FindTeamValidationException;
 import com.example.wordcup.team.infraestructure.repository.converters.TeamToTeamResourceConverter;
 import com.example.wordcup.team.view.resources.TeamResource;
 import org.springframework.beans.factory.annotation.Autowired;

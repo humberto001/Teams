@@ -3,7 +3,7 @@ package com.example.wordcup.team.application.impl.validators;
 import com.example.wordcup.team.domain.model.Team;
 import com.example.wordcup.team.domain.model.TeamRepository;
 import com.example.wordcup.team.domain.model.TeamValidator;
-import com.example.wordcup.team.infra.TeamValidationException;
+import com.example.wordcup.team.infra.exceptions.TeamValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

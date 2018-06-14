@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <teams id="1" name="Corinthians" qtd_players="5"/>
+    <teams id="3" name="Palmeiras" qtd_players="9"/>
+    <teams id="35" name="Sants" qtd_players="10"/>
+    <teams id="23" name="Goias" qtd_players="9"/>
+</dataset>

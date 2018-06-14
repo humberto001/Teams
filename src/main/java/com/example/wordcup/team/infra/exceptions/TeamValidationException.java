@@ -1,4 +1,4 @@
-package com.example.wordcup.team.infra;
+package com.example.wordcup.team.infra.exceptions;
 
 public class TeamValidationException extends RuntimeException {
 

@@ -1,7 +1,7 @@
 package com.example.wordcup.team.infraestructure.repository.httpErrors;
 
-import com.example.wordcup.team.infra.FindTeamValidationException;
-import com.example.wordcup.team.infra.TeamValidationException;
+import com.example.wordcup.team.infra.exceptions.FindTeamValidationException;
+import com.example.wordcup.team.infra.exceptions.TeamValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
