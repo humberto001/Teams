@@ -138,4 +138,98 @@ class TeamEndpointTest extends ConfigGroovySpec {
             mvcResult.response.status == HttpStatus.OK.value()
 
     }
+
+    def "Deve retornar status 404 quando não encontrar o time"(){
+
+        given: "Um time não exista no BD"
+            def id= 50
+
+        and: "Uma requisição para buscar esse time"
+            def uri = "http://localhost:8080/team/${id}"
+
+        when: "Realizar uma requisição"
+
+            def mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)).andReturn()
+
+        then: "Deve retornar status Not Found"
+
+            mvcResult.response.status == HttpStatus.NOT_FOUND.value()
+
+    }
+
+    def "Deve retornar status 404 quando tentar atualizar um time não existente"(){
+
+        given: "Um time não existente no BD"
+
+            def id = 50
+
+        and: "Uma requisição para atualizar esse time"
+
+            def uri = "http://localhost:8080/team/${id}"
+
+        and: "Um payload válido"
+
+        def json = new JsonBuilder()
+        json name: "Russia",
+             numberOfPlayers: 8
+
+
+        when: "Realizar a requisição"
+
+        def mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri).contentType(MediaType.APPLICATION_JSON)
+                        .content(json.toString()))
+                        .andReturn()
+
+
+        then: "Deve retornar status 404 e não atualizar o time"
+
+        mvcResult.response.status == HttpStatus.NOT_FOUND.value()
+
+    }
+
+    def "Deve retornar status 400 quando tentar atualizar um time com número de jogadores maior que 10"(){
+
+        given : "Uma requisição para atualizar um time"
+
+            def id =3
+            def uri = "http://localhost:8080/team/${id}"
+
+        and : "O atributo numberOfPlayer for maior que 10 "
+
+            def json = new JsonBuilder()
+            json numberOfPlayers: 11,
+                 name: "NoMore"
+
+        when: "realizar a requisição"
+
+            def mvcResult = mockMvc.perform(MockMvcRequestBuilders.put(uri)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json.toString()))
+                    .andReturn()
+
+        then: "Deverá exibir status de bad request"
+
+        mvcResult.response.status == HttpStatus.BAD_REQUEST.value()
+
+    }
+
+    def "Deve retornar status 400 quando tentar salvar um time com nome nulo"(){
+
+        given: "Uma requisição para salvar um time"
+
+            def uri = "http://localhost:8080/team"
+
+        and: "O time possuir valor nome nulo"
+
+            def json = new JsonBuilder()
+            json name: "",
+                 numberOfPlayers: 10
+
+        when: "Realizar a requisição"
+            def mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON).content(json.toString())).andReturn()
+
+        then: "Deve retornar bad request"
+
+            mvcResult.response.status == HttpStatus.BAD_REQUEST.value()
+    }
 }
